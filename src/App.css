@@ -1,9 +1,97 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
+* {
+
+  text-align: center;
+  margin:0;
+  padding:0;
+}
+html {
+  display:flex;
+  justify-content: center;
+}
 body {
   font-family: 'Nunito Sans', sans-serif;
 }
 h1 {
   font-family: 'Montserrat', sans-serif;
+}
+.container {
+  display: flex;
+  justify-content:space-between;
+  width: 700px;
+  margin-bottom: 3rem;
+}
+.item {
+  margin: 1.1rem 2rem;
+  
+  color: rgb(124, 46, 89);
+}
+.logo {
+  max-width: 120px;
+  max-height: 40px;
+}
+
+.inputFilter {
+  width: 450px;
+  height: 35px;
+  text-align: left;
+  font-size: 1.1rem;
+  position: relative;
+  top:-15px;
+}
+input::placeholder {
+  font-size: 1.1rem;
+  text-align: left;
+  padding-left: 2rem;
+  color:lightgray;
+  transform:translate3d(0,3px,0);
+  background: url(./img/magni.png);
+  background-size: 25px 25px;
+  background-repeat: no-repeat; 
+  background-position: 0px -3px;
+}
+
+.star {
+  visibility:hidden;
+  font-size:1rem;
+  cursor:pointer;
+}
+.star:before {
+ content: "\2606";
+ position: absolute;
+ visibility:visible;
+}
+.star:checked:before {
+ content: "\2605";
+ position: absolute;
+}
+.bg {
+  background-color: rgb(124, 46, 89);
+}
+.filter{
+  display:flex;
+  justify-content:space-around;
+}
+.pinkFilterBox {
+  max-width: 700px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.grid-item {
+  text-align: center;
+  margin: 0 2rem;
+}
+.filterMenu {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 8rem 0 8rem;
+  
+}
+
+a  {
+  cursor: pointer;
 }
