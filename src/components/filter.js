@@ -16,10 +16,10 @@ class Filter extends Component {
     
     render() {
         const show = (
-            <p>Show filters <i class="fas fa-sort-down"></i></p>
+            <p>Show filters <i className="fas fa-sort-down"></i></p>
         )
         const hide = (
-            <p>Hide filters <i class="fas fa-sort-up"></i></p>
+            <p>Hide filters <i className="fas fa-sort-up"></i></p>
         )
         
         return (
@@ -27,7 +27,7 @@ class Filter extends Component {
                 <input type="text" className="inputFilter" name="filter" placeholder="Search"/>
                     <div className="filterMenu">
                         <p>Filter by:</p>
-                        <a onClick={this.toggle} >{this.state.filter ? hide
+                        <a /*href="#"*/ onClick={this.toggle} >{this.state.filter ? hide
                            : show  }</a>
                     </div> 
                     {this.state.filter ? 
