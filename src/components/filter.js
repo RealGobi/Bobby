@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 class Filter extends Component {
     state = {
         filter: false
@@ -21,7 +20,7 @@ class Filter extends Component {
         const hide = (
             <p>Hide filters <i className="fas fa-sort-up"></i></p>
         )
-        
+       
         return (
             <div className="bg">
                 <input type="text" className="inputFilter" name="filter" placeholder="Search"/>
