@@ -47,10 +47,11 @@ input::placeholder {
   padding-left: 2rem;
   color:lightgray;
   transform:translate3d(0,3px,0);
-  background: url(./img/magni.png);
-  background-size: 25px 25px;
+  background: url(./img/search.svg);
+  background-size: 18px 25px;
   background-repeat: no-repeat; 
   background-position: 0px -3px;
+  background-position: 5px;
 }
 
 .star {
@@ -69,6 +70,7 @@ input::placeholder {
 }
 .bg {
   background-color:#B6557E;
+  padding-bottom: 1rem;
 }
 .filter{
   display:flex;

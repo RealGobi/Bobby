@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 class Filter extends Component {
     state = {
         filter: false
@@ -20,10 +21,9 @@ class Filter extends Component {
         const hide = (
             <p>Hide filters <i className="fas fa-sort-up"></i></p>
         )
-       
         return (
             <div className="bg">
-                <input type="text" className="inputFilter" name="filter" placeholder="Search"/>
+                <input type="text" className="inputFilter" name="filter" placeholder="Search" />
                     <div className="filterMenu">
                         <p>Filter by:</p>
                         <a /*href="#"*/ onClick={this.toggle} >{this.state.filter ? hide
@@ -33,7 +33,7 @@ class Filter extends Component {
                 <div className="filter">
                 <div className="pinkFilterBox">
                     <div className="grid-item">
-                    <input type="checkbox" name="fav" className="star" value ="fav"/>
+                    <input type="checkbox" name="fav" className="star" value ="fav" onClick={this.props.test}/>
                     <p>Favourites</p>
                     </div>
                     <div className="grid-item">
@@ -63,6 +63,7 @@ class Filter extends Component {
                 </div>
                 </div>
                     : null}
+                 
             </div>
         )
     }
