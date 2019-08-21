@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 * {
@@ -40,11 +40,13 @@ h1 {
   font-size: 1.1rem;
   position: relative;
   top:-15px;
+  box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.336);
+  text-indent:30px;
+
 }
 input::placeholder {
   font-size: 1.1rem;
   text-align: left;
-  padding-left: 2rem;
   color:lightgray;
   transform:translate3d(0,3px,0);
   background: url(./img/search.svg);
@@ -54,27 +56,27 @@ input::placeholder {
   background-position: 5px;
 }
 
-.star {
-  visibility:hidden;
-  font-size:1rem;
-  cursor:pointer;
-}
-.star:before {
- content: "\2606";
- position: absolute;
- visibility:visible;
-}
-.star:checked:before {
- content: "\2605";
- position: absolute;
-}
 .bg {
   background-color:#B6557E;
   padding-bottom: 1rem;
+  color:white;
+  font-weight: 300;
 }
+
 .filter{
   display:flex;
   justify-content:space-around;
+}
+.hideNshow {
+  cursor: pointer;
+}
+.hideNshow img {
+  width: .4rem;
+}
+.hideNshow #arrowDown {
+  transform: rotateX(180deg);
+  position: relative;
+  top:-2px;
 }
 .pinkFilterBox {
   max-width: 700px;
@@ -84,9 +86,37 @@ input::placeholder {
   padding: 10px;
 }
 .grid-item {
-  text-align: center;
-  margin: 0 2rem;
+  text-align: left;
+  margin: 0 3rem;
+  display: flex;
+  align-items: center;
 }
+.grid-item p {
+  padding:.4rem .75rem;
+}
+.grid-item input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:1.2rem;
+    height:1.2rem;
+    background:white;
+    border-radius:5px;
+    border:1px solid rgba(0, 0, 0, 0.603);
+}
+input[type='checkbox']:checked {
+    background: url(./img/check.svg);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-color: white;
+}
+.grid-item #favo {
+  width: 1.2rem;
+}
+
+.grid-item #favo:checked {
+  background: url(./img/check.svg);
+
+}
+
 .filterMenu {
   display: flex;
   justify-content: space-between;
@@ -103,9 +133,12 @@ a  {
   justify-content: center;
   align-items: center;
 }
+.robots li {
+  list-style: none;
+}
 .card {
   display: grid;
-  grid-template-columns: 5px 50px auto auto 10px;
+  grid-template-columns: 50px auto auto 10px;
   padding: 10px;
   color:grey;
   background: #A0D2DD;
@@ -116,10 +149,13 @@ a  {
   border-radius: 10px;
   align-items: center;
 }
-.card:nth-child(even){
+.card:nth-child(1){
+  margin-top: .5rem;
+}
+.card:nth-child(odd){
   background: #C3E3E8;
 }
-.card img {
+.card .botPic {
   width: 45px;
   height: 45px;
   border-radius: 9999px;
@@ -127,22 +163,13 @@ a  {
   border: 1px solid black;
 
 }
-.card .star {
+.star {
   position: relative;
-  left: 0px;
-  top: -40px;
-  font-size: 1.4rem;
+  left: 7px;
+  top: -31px;
+  width: 20px;
 }
-.card .star:before {
-  content: "\2606";
-  color: 	#D5894D;
-  position: absolute;
-  visibility:visible;
-}
-.card .star:checked:before {
-  content: "\2605";
-  position: absolute;
- }
+
  .index {
    position: relative;
    left:-40px;

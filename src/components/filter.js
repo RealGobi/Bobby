@@ -1,69 +1,89 @@
 import React, { Component } from 'react';
+import starInActive from '../img/star-inactive.svg'
+import starActive from '../img/star-active.svg'
+import arrow from '../img/triangle-light.svg'
 
 class Filter extends Component {
     state = {
-        filter: false
+        filter: false,
+        fav: false
     }
-
-
+    
+    
     toggle = () => {
         this.setState({
             filter: !this.state.filter
         })
     }
-
-
+    fav = () => {
+        this.setState({
+            fav: !this.state.fav
+        })
+    }
+    
+    
+    
+    searchUpdate(){
+        const val = this.myValue.value;
+        this.props.searchUpdate(val)
+    }
+     onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+    }
     
     render() {
-        const show = (
-            <p>Show filters <i className="fas fa-sort-down"></i></p>
-        )
-        const hide = (
-            <p>Hide filters <i className="fas fa-sort-up"></i></p>
-        )
+
+        let temp=[];
+        this.props.robotsProps.map(cat => {
+            return cat.categories.map((tac) => {
+                return temp.push(tac)
+            })
+            })
+            temp.sort();
+        console.log(temp)
+        const unique = temp.filter(this.onlyUnique)
+        console.log(unique)
+                    
+        const show = (<p style={{fontSize:"10px"}}>Show filters<img src={arrow} style={{paddingLeft:"5px"}} alt="arrow"/></p>)
+        const hide = (<p style={{fontSize:"10px"}}>Hide filters<img src={arrow} alt="arrow"  style={{paddingLeft:"5px"}} id="arrowDown"/></p>)
+        const act = (<img src={starActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
+        const inAct = (<img src={starInActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
+        const filterCategorys = unique.map(uniq => {
+            return (
+                <div className="grid-item" key={uniq}>
+                <input type="checkbox" name="fav"  value ="fav" onClick={this.props.test} />
+                <p style={{fontSize:"12px"}}>{uniq}</p>
+                </div>
+            )
+        });
+  
+
         return (
             <div className="bg">
-                <input type="text" className="inputFilter" name="filter" placeholder="Search" />
+                <input 
+                type="text" 
+                className="inputFilter" 
+                placeholder="Search" 
+                onChange={this.searchUpdate.bind(this)}
+                ref={(value)=> this.myValue = value }
+                />
                     <div className="filterMenu">
-                        <p>Filter by:</p>
-                        <a /*href="#"*/ onClick={this.toggle} >{this.state.filter ? hide
-                           : show  }</a>
+                        <p style={{fontSize:"10px"}}>Filter by:</p>
+                        <span className="hideNshow" onClick={this.toggle} >{this.state.filter ? hide
+                           : show  }
+                        </span>
                     </div> 
                     {this.state.filter ? 
                 <div className="filter">
-                <div className="pinkFilterBox">
-                    <div className="grid-item">
-                    <input type="checkbox" name="fav" className="star" value ="fav" onClick={this.props.test}/>
-                    <p>Favourites</p>
-                    </div>
-                    <div className="grid-item">
-                    <input type="checkbox" name="catA" value="catA"/>
-                    <p>Category A</p>
-                    </div>
-                    <div className="grid-item">
-                    <input type="checkbox" name="catB" value="catB"/>
-                    <p>Category B</p>
-                    </div>
-                    <div className="grid-item">
-                    <input type="checkbox" name="catC" value="catC"/>
-                    <p>Category C</p>
-                    </div>
-                    <div className="grid-item">
-                    <input type="checkbox" name="cyborg" value="cyborg"/>
-                    <p>Cyborg</p>
-                    </div>
-                    <div className="grid-item">
-                    <input type="checkbox" name="droid" value="droid"/>
-                    <p>Droid</p>
-                    </div>
-                    <div className="grid-item">
-                    <input type="checkbox" name="proto" value="proto"/>
-                    <p>Prototype</p>
-                    </div>
+                    <div className="pinkFilterBox">
+                        <div className="grid-item">
+                            <span onClick={this.props.test}>{this.state.fav ? act : inAct }</span>
+                                <p style={{fontSize:"12px"}}>Favourites</p>
+                        </div>
+                     {filterCategorys}
                 </div>
                 </div>
-                    : null}
-                 
+                    : null }
             </div>
         )
     }

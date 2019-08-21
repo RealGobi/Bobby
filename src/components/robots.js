@@ -6,7 +6,8 @@ import Robot from './robot';
 
        state = {
             robots: [],
-            catFav: false
+            catFav: false,
+            searchText: ''
         }
       
 
@@ -17,8 +18,8 @@ import Robot from './robot';
         await fetch(API)
         .then(res => res.json())
         .then((data) => {
-            this.setState({ robots: data })
-            console.log(this.state.robots)
+                this.setState({ robots: data })
+                console.log(this.state.robots)
         })
         .catch(console.log)
     }
@@ -26,12 +27,30 @@ import Robot from './robot';
         this.setState({catFav: !this.state.catFav})
         
     }
+
+    searchUpdate(value) {
+        this.setState({
+            searchText: value
+        })
+        console.log(this.state.searchText)
+
+      }
+
+
     render() {
 
         return (
          <div>
-             <Filter test={this.test} />
-                <Robot robotsProps={this.state.robots}/>
+             <Filter 
+                robotsProps={this.state.robots}
+                test={this.test} 
+                searchText={this.state.searchText} 
+                searchUpdate={this.searchUpdate.bind(this)}
+             />
+             <Robot 
+                robotsProps={this.state.robots}
+                searchText={this.state.searchText} 
+             />
             </div>
         );
       }
