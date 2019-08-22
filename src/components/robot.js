@@ -5,7 +5,7 @@ import arrow from '../img/triangle-dark.svg'
 
 
 
-export default ({ searchText, robotsProps, score, scoreItem }) => {
+export default ({ searchText, robotsProps, score, scoreItem, activeCategory }) => {
 
    
     
@@ -29,32 +29,31 @@ export default ({ searchText, robotsProps, score, scoreItem }) => {
            return comparison;
         } else return  comparison * -1;
       }
-
- 
-        const robotSearch = robotsProps
-        .sort(sortByScore)
-        .filter(bot =>{
-            return bot.name.toLowerCase().indexOf(searchText.toLowerCase()) >= 0;
+      const robotSearch = robotsProps
+      .sort(sortByScore)
+      .filter(bot =>{
+          return bot.name.toLowerCase().indexOf(searchText.toLowerCase()) >= 0;
         })          
         .map((bot, idx) => {
-            console.log(bot)
-
-           
+             if(bot.categories.indexOf(activeCategory) < 0){
             return (
-                  <div className="card" key={idx}>
-                        {/* <img className="botPic" src={pic + bot.image} alt="bot images" height="42" width="42" /> */}
-                        <div className="botPic" style={{ backgroundImage: `url("${pic + bot.image}")`, backgroundSize: 'contain'}}></div>
-                            <span style={{paddingLeft:".5rem", textAlign:"left"}}>  
-                               <p style={{textAlign:"left"}}>{bot.name}</p> 
-                                    <span className="numberOfTheBeast">{idx+1}.</span>
-                                  <span style={{fontSize:"10px", textAlign:"left"}}>{bot.categories.map(cat => {
-                                         return <p key={i++} style={{display:"inline", padding:".2rem"}}>{cat}</p>})}
-                                 </span>
-                          </span>
-                       <p style={{textAlign:"right", paddingRight:"1rem"}}>{bot.score}</p>
-                       <img src={starActive} alt="star" className="star"/>
-                 </div>
-                ) 
+                      <div className="card" key={idx}>
+                            {/* <img className="botPic" src={pic + bot.image} alt="bot images" height="42" width="42" /> */}
+                            <div className="botPic" style={{ backgroundImage: `url("${pic + bot.image}")`, backgroundSize: 'contain'}}></div>
+                                <span style={{paddingLeft:".5rem", textAlign:"left"}}>  
+                                   <p style={{textAlign:"left"}}>{bot.name}</p> 
+                                        <span className="numberOfTheBeast">{idx+1}.</span>
+                                      <span style={{fontSize:"10px", textAlign:"left"}}>{bot.categories.map(cat => {
+                                             return <p key={i++} style={{display:"inline", padding:".2rem"}}>{cat}</p>})}
+                                     </span>
+                              </span>
+                           <p style={{textAlign:"right", paddingRight:"1rem"}}>{bot.score}</p>
+                           <img src={starActive} alt="star" className="star"/>
+                     </div>
+                    ) 
+            }
+            return null;
+           
             });
             const spanStyle = {
                 color: 'grey',

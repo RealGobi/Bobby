@@ -9,6 +9,7 @@ import Robot from './robot';
             catFav: false,
             searchText: '',
             scoreItem:false,
+            activeCategory:''
         }
       
 
@@ -24,11 +25,10 @@ import Robot from './robot';
         .catch(console.log)
 
     }
-            handleChange = (uniq) => {
-                console.log(uniq)
-            }
+    handleChange = (uniq) => {
+    this.setState({activeCategory:uniq})    
+    }
     test = () => {
-      console.log('jimmy')
     }
 
     score = () => {
@@ -42,15 +42,15 @@ import Robot from './robot';
             searchText: value
         })
         console.log(this.state.searchText)
-
-      }
-
-
-
+        
+    }
+    
+    
     render() {
 
         return (
-         <div>
+            
+            <div>
              <Filter 
                 onChange={this.handleChange}
                 robotsProps={this.state.robots}
@@ -63,6 +63,7 @@ import Robot from './robot';
                 score={this.score.bind(this)}
                 robotsProps={this.state.robots}
                 searchText={this.state.searchText} 
+                activeCategory={this.state.activeCategory}
              />
             </div>
         );

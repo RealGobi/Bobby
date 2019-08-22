@@ -43,12 +43,13 @@ class Filter extends Component {
             })
             })
             temp.sort();
-       // console.log(temp)
-        const filterBySet = [...new Set(temp)];
-       // const unique = temp.filter(this.onlyUnique)
-       // console.log(unique)
-
-       // filterBySet ersätter allt med unique... Har kvar koden för framtida ref.
+            // console.log(temp)
+            const filterBySet = [...new Set(temp)];
+            // const unique = temp.filter(this.onlyUnique)
+            // console.log(unique)
+            
+            // filterBySet ersätter allt med unique... Har kvar koden för framtida ref.
+            console.log(filterBySet)
                     
         const show = (<p style={{fontSize:"10px"}}>Show filters<img src={arrow} style={{paddingLeft:"5px"}} alt="arrow"/></p>)
         const hide = (<p style={{fontSize:"10px"}}>Hide filters<img src={arrow} alt="arrow"  style={{paddingLeft:"5px"}} id="arrowDown"/></p>)
