@@ -12,7 +12,9 @@ export default ({ searchText, robotsProps, score, scoreItem }) => {
     let i = 1;
     const pic = 'https://bobby-testing.s3.eu-north-1.amazonaws.com/bobbybots/img/';
     console.log(robotsProps)
-        
+      
+
+    
        function sortByScore (a, b)  {
         const compA = a.score;
         const compB = b.score;
@@ -27,18 +29,24 @@ export default ({ searchText, robotsProps, score, scoreItem }) => {
            return comparison;
         } else return  comparison * -1;
       }
-    
+
+ 
         const robotSearch = robotsProps
         .sort(sortByScore)
         .filter(bot =>{
             return bot.name.toLowerCase().indexOf(searchText.toLowerCase()) >= 0;
         })          
-        .map(bot => {
+        .map((bot, idx) => {
+            console.log(bot)
+
+           
             return (
-                  <div className="card" key={bot.id}>
-                        <img className="botPic" src={pic + bot.image} alt="bot images" height="42" width="42"/>
-                            <span style={{paddingLeft:".5rem", textAlign:"left"}}>    
+                  <div className="card" key={idx}>
+                        {/* <img className="botPic" src={pic + bot.image} alt="bot images" height="42" width="42" /> */}
+                        <div className="botPic" style={{ backgroundImage: `url("${pic + bot.image}")`, backgroundSize: 'contain'}}></div>
+                            <span style={{paddingLeft:".5rem", textAlign:"left"}}>  
                                <p style={{textAlign:"left"}}>{bot.name}</p> 
+                                    <span className="numberOfTheBeast">{idx+1}.</span>
                                   <span style={{fontSize:"10px", textAlign:"left"}}>{bot.categories.map(cat => {
                                          return <p key={i++} style={{display:"inline", padding:".2rem"}}>{cat}</p>})}
                                  </span>

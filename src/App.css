@@ -14,7 +14,7 @@ html {
 body {
   font-family: 'Nunito Sans', sans-serif;
 }
-h1 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
 }
 .container {
@@ -159,8 +159,8 @@ input[type='checkbox']:checked {
   border-radius: 9999px;
   background-color: white;
   border: 1px solid black;
-
 }
+
 .star {
   position: relative;
   left: 7px;
@@ -168,7 +168,8 @@ input[type='checkbox']:checked {
   width: 20px;
 }
 
- .index {
-   position: relative;
-   left:-40px;
- }
+.numberOfTheBeast {
+  position: relative;
+  left:-100px;
+  top:-10px;
+}

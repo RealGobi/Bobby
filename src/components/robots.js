@@ -8,7 +8,7 @@ import Robot from './robot';
             robots: [],
             catFav: false,
             searchText: '',
-            scoreItem:false
+            scoreItem:false,
         }
       
 
@@ -20,13 +20,15 @@ import Robot from './robot';
         .then(res => res.json())
         .then((data) => {
                 this.setState({ robots: data })
-                console.log(this.state.robots)
         })
         .catch(console.log)
+
     }
+            handleChange = (uniq) => {
+                console.log(uniq)
+            }
     test = () => {
-        this.setState({catFav: !this.state.catFav})
-        
+      console.log('jimmy')
     }
 
     score = () => {
@@ -44,11 +46,13 @@ import Robot from './robot';
       }
 
 
+
     render() {
 
         return (
          <div>
              <Filter 
+                onChange={this.handleChange}
                 robotsProps={this.state.robots}
                 test={this.test} 
                 searchText={this.state.searchText} 
