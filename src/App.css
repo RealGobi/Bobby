@@ -78,6 +78,7 @@ input::placeholder {
   position: relative;
   top:-2px;
 }
+
 .pinkFilterBox {
   max-width: 700px;
   text-align: center;
@@ -124,9 +125,6 @@ input[type='checkbox']:checked {
   
 }
 
-a  {
-  cursor: pointer;
-}
 .robots {
   display: flex;
   flex-direction: column;

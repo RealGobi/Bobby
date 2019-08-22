@@ -5,17 +5,34 @@ import arrow from '../img/triangle-dark.svg'
 
 
 
-export default ({ searchText, robotsProps }) => {
-    
-     
-       let i = 1;
-        const pic = 'https://bobby-testing.s3.eu-north-1.amazonaws.com/bobbybots/img/';
-        console.log(robotsProps)
+export default ({ searchText, robotsProps, score, scoreItem }) => {
 
+   
+    
+    let i = 1;
+    const pic = 'https://bobby-testing.s3.eu-north-1.amazonaws.com/bobbybots/img/';
+    console.log(robotsProps)
+        
+       function sortByScore (a, b)  {
+        const compA = a.score;
+        const compB = b.score;
+
+        let comparison = 0;
+        if (compA > compB) {
+          comparison = 1;
+        } else if (compA < compB) {
+          comparison = -1;
+        }
+         if(scoreItem){
+           return comparison;
+        } else return  comparison * -1;
+      }
+    
         const robotSearch = robotsProps
+        .sort(sortByScore)
         .filter(bot =>{
             return bot.name.toLowerCase().indexOf(searchText.toLowerCase()) >= 0;
-        })           
+        })          
         .map(bot => {
             return (
                   <div className="card" key={bot.id}>
@@ -44,14 +61,27 @@ export default ({ searchText, robotsProps }) => {
             }
             const arrowStyle = {
                 width: '10px',
-                padding: '.1rem .3rem'
+                padding: '0rem .3rem',
+                transform: "rotateX(180deg)",
+                cursor: "pointer"
+
             }
+            const arrowDown = {
+                width: '10px',
+                padding: '0rem .3rem',
+                cursor: "pointer"
+            }
+
+            const topScore = (<img src={arrow}  alt="arrow" style={arrowStyle} />)
+            const lowScore = (<img src={arrow}  alt="arrow" style={arrowDown} />)
             return (
                 <div>
                     <span style={spanStyleFlex}>
                         <p style={spanStyle}>Name</p>
                         <p style={spanStyle}>Score
-                        <img src={arrow}  alt="arrow" style={arrowStyle} />
+                        <span onClick={score}>
+                            {scoreItem ? topScore : lowScore}
+                        </span>
                         </p>
                     </span>
                     <ul className="robots">

@@ -7,7 +7,8 @@ import Robot from './robot';
        state = {
             robots: [],
             catFav: false,
-            searchText: ''
+            searchText: '',
+            scoreItem:false
         }
       
 
@@ -26,6 +27,12 @@ import Robot from './robot';
     test = () => {
         this.setState({catFav: !this.state.catFav})
         
+    }
+
+    score = () => {
+        this.setState({
+            scoreItem: !this.state.scoreItem
+        })
     }
 
     searchUpdate(value) {
@@ -48,6 +55,8 @@ import Robot from './robot';
                 searchUpdate={this.searchUpdate.bind(this)}
              />
              <Robot 
+                scoreItem={this.state.scoreItem}
+                score={this.score.bind(this)}
                 robotsProps={this.state.robots}
                 searchText={this.state.searchText} 
              />
