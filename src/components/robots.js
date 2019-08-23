@@ -25,15 +25,21 @@ import Robot from './robot';
         .catch(console.log)
 
     }
+
     handleChange = (uniq) => {
     this.setState({activeCategory:uniq})    
+    console.log(this.state.activeCategory)
     }
-    test = () => {
-    }
+    
 
     score = () => {
         this.setState({
             scoreItem: !this.state.scoreItem
+        })
+    }
+    categoriesFavo = () => {
+        this.setState({
+            catFav: !this.state.catFav
         })
     }
 
@@ -45,7 +51,6 @@ import Robot from './robot';
         
     }
     
-    
     render() {
 
         return (
@@ -54,11 +59,12 @@ import Robot from './robot';
              <Filter 
                 onChange={this.handleChange}
                 robotsProps={this.state.robots}
-                test={this.test} 
                 searchText={this.state.searchText} 
                 searchUpdate={this.searchUpdate.bind(this)}
              />
              <Robot 
+                catFav={this.state.catFav}
+                categoriesFavo={this.categoriesFavo.bind(this)}
                 scoreItem={this.state.scoreItem}
                 score={this.score.bind(this)}
                 robotsProps={this.state.robots}

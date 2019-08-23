@@ -49,7 +49,6 @@ class Filter extends Component {
             // console.log(unique)
             
             // filterBySet ersätter allt med unique... Har kvar koden för framtida ref.
-            console.log(filterBySet)
                     
         const show = (<p style={{fontSize:"10px"}}>Show filters<img src={arrow} style={{paddingLeft:"5px"}} alt="arrow"/></p>)
         const hide = (<p style={{fontSize:"10px"}}>Hide filters<img src={arrow} alt="arrow"  style={{paddingLeft:"5px"}} id="arrowDown"/></p>)
@@ -85,7 +84,7 @@ class Filter extends Component {
                 <div className="filter">
                     <div className="pinkFilterBox">
                         <div className="grid-item">
-                            <span onClick={this.props.test}>{this.state.fav ? act : inAct }</span>
+                            <span onClick={()=>this.handleChange('favo')}>{this.state.fav ? act : inAct }</span>
                                 <p style={{fontSize:"12px"}}>Favourites</p>
                         </div>
                      {filterCategorys}
