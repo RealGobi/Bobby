@@ -28,31 +28,17 @@ class Filter extends Component {
         const val = this.myValue.value;
         this.props.searchUpdate(val)
     }
-    //  onlyUnique(value, index, self) { 
-        //     return self.indexOf(value) === index;
-        // }
-        handleChange = (uniq) => this.props.onChange(uniq);
+
+    handleChange = (uniq) => this.props.onChange(uniq);
         
         
-        render() {
-            // const temp=[];
-        // this.props.robotsProps.map(categories => {
-        //     return categories.categories.map((cat) => {
-        //         return temp.push(cat)
-        //     })
-        //     })
-        //     temp.sort();
-        //     // console.log(temp)
-        //     const filterBySet = [...new Set(temp)];
-            // const unique = temp.filter(this.onlyUnique)
-            // console.log(unique)
-            
-            // filterBySet ersätter allt med unique... Har kvar koden för framtida ref.
-                    
+    render() {
+       
         const show = (<p style={{fontSize:"10px"}}>Show filters<img src={arrow} style={{paddingLeft:"5px"}} alt="arrow"/></p>)
         const hide = (<p style={{fontSize:"10px"}}>Hide filters<img src={arrow} alt="arrow"  style={{paddingLeft:"5px"}} id="arrowDown"/></p>)
         const act = (<img src={starActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
         const inAct = (<img src={starInActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
+
         const filterCategorys = this.props.filterBySet.map(uniq => {
             return (
                 <div className="grid-item" key={uniq}>

@@ -61,6 +61,7 @@ input::placeholder {
   padding-bottom: 1rem;
   color:white;
   font-weight: 300;
+  width: 620px;
 }
 
 .filter{
