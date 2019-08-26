@@ -29,22 +29,21 @@ class Filter extends Component {
         this.props.searchUpdate(val)
     }
     //  onlyUnique(value, index, self) { 
-    //     return self.indexOf(value) === index;
-    // }
-    handleChange = (uniq) => this.props.onChange(uniq);
-    
-   
-    render() {
- 
-        let temp=[];
-        this.props.robotsProps.map(cat => {
-            return cat.categories.map((tac) => {
-                return temp.push(tac)
-            })
-            })
-            temp.sort();
-            // console.log(temp)
-            const filterBySet = [...new Set(temp)];
+        //     return self.indexOf(value) === index;
+        // }
+        handleChange = (uniq) => this.props.onChange(uniq);
+        
+        
+        render() {
+            // const temp=[];
+        // this.props.robotsProps.map(categories => {
+        //     return categories.categories.map((cat) => {
+        //         return temp.push(cat)
+        //     })
+        //     })
+        //     temp.sort();
+        //     // console.log(temp)
+        //     const filterBySet = [...new Set(temp)];
             // const unique = temp.filter(this.onlyUnique)
             // console.log(unique)
             
@@ -54,7 +53,7 @@ class Filter extends Component {
         const hide = (<p style={{fontSize:"10px"}}>Hide filters<img src={arrow} alt="arrow"  style={{paddingLeft:"5px"}} id="arrowDown"/></p>)
         const act = (<img src={starActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
         const inAct = (<img src={starInActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
-        const filterCategorys = filterBySet.map(uniq => {
+        const filterCategorys = this.props.filterBySet.map(uniq => {
             return (
                 <div className="grid-item" key={uniq}>
                 <input type="checkbox" name="fav"  value ="fav" 

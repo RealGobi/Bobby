@@ -70,7 +70,7 @@ export default ({ searchText, robotsProps, score, scoreItem, activeCategory, cat
           return bot.name.toLowerCase().indexOf(searchText.toLowerCase()) >= 0;
         })          
         .map((bot, idx) => {
-             if(bot.categories.indexOf(activeCategory) > 0){
+             if(bot.categories.indexOf(activeCategory) < 0){
                  
                 return (
                     <div className="card" key={idx}>

@@ -9,7 +9,8 @@ import Robot from './robot';
             catFav: false,
             searchText: '',
             scoreItem:false,
-            activeCategory:''
+            activeCategory:[],
+            categories:[]
         }
       
 
@@ -24,13 +25,28 @@ import Robot from './robot';
         })
         .catch(console.log)
 
-    }
+        const temp=[];
+        this.state.robots.map(categories => {
+            return categories.categories.map((cat) => {
+                return temp.push(cat)
+            })
+        })
+        temp.sort();
+        const filterBySet = [...new Set(temp)];
+        this.setState({categories:filterBySet})
+        this.setState({activeCategory:filterBySet})
+        console.log(this.state.categories)
+
+        }
 
     handleChange = (uniq) => {
-    this.setState({activeCategory:uniq})    
-    console.log(this.state.activeCategory)
+        this.setState(prevState => ({
+            //activeCategory: [...prevState.activeCategory, uniq]
+            activeCategory: prevState.activeCategory.includes(uniq) 
+                ? prevState.activeCategory.filter(c => c === uniq)
+                : [...prevState.activeCategory, uniq]
+        }))
     }
-    
 
     score = () => {
         this.setState({
@@ -57,6 +73,7 @@ import Robot from './robot';
             
             <div>
              <Filter 
+                filterBySet={this.state.categories}
                 onChange={this.handleChange}
                 robotsProps={this.state.robots}
                 searchText={this.state.searchText} 
