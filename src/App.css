@@ -25,7 +25,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .item {
   margin: 1.1rem 2rem;
-  
   color: rgb(124, 46, 89);
 }
 .logo {
@@ -61,17 +60,16 @@ input::placeholder {
   padding-bottom: 1rem;
   color:white;
   font-weight: 300;
-  width: 620px;
+  width: 100%;
 }
 
 .filter{
   display:flex;
   justify-content:space-around;
 }
-.hideNshow {
-  cursor: pointer;
-}
+
 .hideNshow img {
+  cursor: pointer;
   width: .4rem;
 }
 .hideNshow #arrowDown {
@@ -120,11 +118,22 @@ input[type='checkbox']:checked {
 }
 
 .filterMenu {
-  display: flex;
-  justify-content: space-between;
-  margin: 2rem 8rem 0 8rem;
-  
+  display: grid;
+  grid-template-columns: 50% 50%;
+  font-size: 10px;
+  width: 450px;
+  margin: 0 auto;
 }
+
+.activeFilter, .inActiveFilter {
+  margin-left: 10px;
+  text-align: left;
+}
+.hideFilter, .showFilter {
+  text-align: right;
+  margin-left: 10px;
+}
+
 
 .robots {
   display: flex;

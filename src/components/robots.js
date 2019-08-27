@@ -29,18 +29,18 @@ class Robots extends Component {
       });
     });
     temp.sort();
-    const filterBySet = [...new Set(temp)];
+    let filterBySet = [...new Set(temp)];
+    filterBySet.push('Favourites')
     this.setState({ categories: filterBySet });
-    this.setState({ activeCategory: filterBySet });
-    console.log(this.state.categories);
-  }
+    this.setState({ activeCategory: filterBySet});
+}
+
 
   handleChange = uniq => {
     this.setState(prevState => ({
-      //activeCategory: [...prevState.activeCategory, uniq]
-      activeCategory: prevState.activeCategory.includes(uniq)
-        ? prevState.activeCategory.filter(c => c === uniq)
-        : [...prevState.activeCategory, uniq]
+       activeCategory: prevState.activeCategory.includes(uniq)
+         ? prevState.activeCategory.filter(c => c === uniq)
+           : [...prevState.activeCategory, uniq ]
     }));
 };
 
@@ -49,20 +49,16 @@ score = () => {
         scoreItem: !this.state.scoreItem
     });
 };
-categoriesFavo = () => {
-    this.setState({
-        catFav: !this.state.catFav
-    });
-};
 
 searchUpdate(value) {
     this.setState({
         searchText: value
     });
-    console.log(this.state.searchText);
 }
+
+
 render() {
-    console.log(this.state.activeCategory)
+
     const sortByScore = (a, b) => {
         const compA = a.score;
         const compB = b.score;
@@ -109,15 +105,12 @@ render() {
     const topScore = <img src={arrow} alt="arrow" style={arrowStyle} />;
     const lowScore = <img src={arrow} alt="arrow" style={arrowDown} />;
 
-    
-
-    console.log(this.state.scoreItem);
     return (
       <div className="robots">
         <Filter
           filterBySet={this.state.categories}
+          activeCategory={this.state.activeCategory}
           onChange={this.handleChange}
-          robotsProps={this.state.robots}
           searchText={this.state.searchText}
           searchUpdate={this.searchUpdate.bind(this)}
         />
@@ -130,21 +123,28 @@ render() {
             </span>
           </p>
         </span>
-        {this.state.robots
+        {
+   this.state.robots
       .sort(sortByScore)
       .filter(bot => {
         return (
+            // sökfunktion, gör allt till Lowercase och jämför det men skriver i input-fältet med robotarnas namn.
           bot.name.toLowerCase().indexOf(this.state.searchText.toLowerCase()) >=
           0
         );
       })
-      .map((bot, idx) => { 
-        if(bot.categories.indexOf(this.state.activeCategory) < 0){
+      // sorterar ut på vald kategori, först kollar "some()"med samarbete av "include()" om bot.cat finns i activcat, sen mapas de som kolarar filtreringen ut
+      .filter(bot => {
+        return bot.categories.some(value => {
+            return this.state.activeCategory.includes(value) 
+        })
+      })
+      .map((bot, idx) => {
               return <Robot idx={idx} bot={bot} key={idx}/>
           } 
-          else return null;
-        })}
-      </div>
+        )
+    } 
+    </div>
     );
   }
 }
