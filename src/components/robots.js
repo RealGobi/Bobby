@@ -37,14 +37,14 @@ class Robots extends Component {
 }
 
 
-  handleChange = (uniq, prevState) => {
-      if(this.state.activeCategory.length === this.state.categories.length){
+  handleChange = uniq => {
+      if(this.state.activeCategory === this.state.categories){
         console.log('vill jag va här? ...1')
 
           this.setState(prevState => ({
              activeCategory: prevState.activeCategory.includes(uniq) 
              ? prevState.activeCategory.filter(c => c === uniq)
-             : [...prevState.activeCategory, uniq ]
+             : null
             }));
             return;
       }
