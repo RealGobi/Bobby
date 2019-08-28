@@ -8,6 +8,7 @@ class Robots extends Component {
     robots: [],
     searchText: "",
     scoreItem: false,
+    nameItem: false,
     activeCategory: [],
     categories: []
   };
@@ -36,19 +37,43 @@ class Robots extends Component {
 }
 
 
-  handleChange = uniq => {
-    this.setState(prevState => ({
-       activeCategory: prevState.activeCategory.includes(uniq)
-       ? prevState.activeCategory.filter(c => c === uniq)
-       : [...prevState.activeCategory, uniq ]
-    }));
+  handleChange = (uniq, prevState) => {
+      if(this.state.activeCategory.length === this.state.categories.length){
+        console.log('vill jag va här? ...1')
+
+          this.setState(prevState => ({
+             activeCategory: prevState.activeCategory.includes(uniq) 
+             ? prevState.activeCategory.filter(c => c === uniq)
+             : [...prevState.activeCategory, uniq ]
+            }));
+            return;
+      }
+      if(this.state.activeCategory.includes(uniq)){
+          console.log('vill jag va här? ...2')
+          // ta bort cat om den redan finns itryckt
+         this.setState({
+            activeCategory:this.state.activeCategory.filter(item => item !== uniq)
+         })
+      } else {
+        console.log('vill jag va här? ...3')
+
+        this.setState(prevState =>({
+            activeCategory:  [...prevState.activeCategory, uniq ]
+        }))
+
+      }
+    
 };
-
-
 
 score = () => {
     this.setState({
         scoreItem: !this.state.scoreItem
+    });
+};
+
+name = () => {
+    this.setState({
+        nameItem: !this.state.nameItem
     });
 };
 
@@ -57,6 +82,22 @@ searchUpdate(value) {
         searchText: value
     });
 }
+// sortByName  = (a, b) => {
+//     const compA = a.name;
+//     const compB = b.name;
+    
+//     let comparison = 0;
+//     if (compA > compB) {
+//         comparison = 1;
+//     } else if (compA < compB) {
+//         comparison = -1;
+//     }
+//   if (this.state.nameItem) {
+//     return comparison;
+//   } else return comparison * -1;
+// };
+
+
 sortByScore = (a, b) => {
     const compA = a.score;
     const compB = b.score;
@@ -81,6 +122,11 @@ render() {
     const spanStyle = {
       color: "grey",
       fontSize: "12px"
+    };
+    const spanStyleName = {
+      color: "grey",
+      fontSize: "12px",
+      padding: " 0 0 0 35px"
     };
     const spanStyleFlex = {
       display: "flex",
@@ -117,7 +163,7 @@ render() {
           searchUpdate={this.searchUpdate.bind(this)}
         />
         <span style={spanStyleFlex}>
-          <p style={spanStyle}>Name</p>
+          <p style={spanStyleName}  onClick={this.name}>Name</p>
           <p style={spanStyle}>
             Score
             <span onClick={this.score}>
@@ -126,8 +172,9 @@ render() {
           </p>
         </span>
         {
-   this.state.robots
-      .sort(this.sortByScore)
+            
+   this.state.robots 
+      .sort(/*this.state.nameItem ? this.sortByName :*/ this.sortByScore)
       .filter(bot => {
         return (
             // sökfunktion, gör allt till Lowercase och jämför det men skriver i input-fältet med robotarnas namn.

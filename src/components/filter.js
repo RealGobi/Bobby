@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import starInActive from '../img/star-inactive.svg'
-import starActive from '../img/star-active.svg'
 import arrow from '../img/triangle-light.svg'
 import PropTypes from 'prop-types';
 
@@ -41,8 +39,6 @@ class Filter extends Component {
         const hide = (<p className="hideFilter" style={{fontSize:"10px"}}>Hide filters<img src={arrow} alt="arrow"  style={{paddingLeft:"5px"}} id="arrowDown"/></p>)
         const activeFilter = (<p className="activeFilter">Active filter:<br/> {this.props.activeCategory.join(' , ')}</p>)
         const inActiveFilter = (<p className="inActiveFilter">Filter by:</p>)
-        const act = (<img src={starActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
-        const inAct = (<img src={starInActive} onClick={this.fav} name="fav" alt="favCheck"  value ="fav" type="fav"  id="favo"/>)
 
         const filterCategorys = this.props.filterBySet.map(uniq => {
             return (

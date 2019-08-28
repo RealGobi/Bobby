@@ -3,10 +3,13 @@ import starInActive from "../img/star-inactive.svg";
 import starActive from "../img/star-active.svg";
 
 
+
 export default (props) => {
 
-    const [catFav, setCatFav] = useState(false);
     
+    const [catFav, setCatFav] = useState(false);
+ 
+
 function addFavourites() {
     switch (catFav){
         case !true: // om den inte är san, allså falsk, så lägg till.
