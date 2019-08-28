@@ -47,7 +47,7 @@ class Filter extends Component {
         const filterCategorys = this.props.filterBySet.map(uniq => {
             return (
                 <div className="grid-item" key={uniq}>
-                <input type="checkbox" name="fav"  value ="fav" 
+                <input type="checkbox" 
                 onClick={ ()=>this.handleChange(uniq)} />
                 <p style={{fontSize:"12px"}}>{uniq}</p>
                 </div>
@@ -76,10 +76,6 @@ class Filter extends Component {
                     {this.state.filter ? 
                 <div className="filter">
                     <div className="pinkFilterBox">
-                        <div className="grid-item">
-                            <span onClick={()=>this.handleChange('Favourites')}>{this.state.fav ? act : inAct }</span>
-                                <p style={{fontSize:"12px"}}>Favourites</p>
-                        </div>
                      {filterCategorys}
                 </div>
                 </div>

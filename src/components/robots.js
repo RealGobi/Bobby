@@ -30,7 +30,7 @@ class Robots extends Component {
     });
     temp.sort();
     let filterBySet = [...new Set(temp)];
-    filterBySet.push('Favourites')
+    filterBySet.unshift('Favourites')
     this.setState({ categories: filterBySet });
     this.setState({ activeCategory: filterBySet});
 }
@@ -39,10 +39,12 @@ class Robots extends Component {
   handleChange = uniq => {
     this.setState(prevState => ({
        activeCategory: prevState.activeCategory.includes(uniq)
-         ? prevState.activeCategory.filter(c => c === uniq)
-           : [...prevState.activeCategory, uniq ]
+       ? prevState.activeCategory.filter(c => c === uniq)
+       : [...prevState.activeCategory, uniq ]
     }));
 };
+
+
 
 score = () => {
     this.setState({
@@ -55,24 +57,24 @@ searchUpdate(value) {
         searchText: value
     });
 }
+sortByScore = (a, b) => {
+    const compA = a.score;
+    const compB = b.score;
+    
+    let comparison = 0;
+    if (compA > compB) {
+        comparison = 1;
+    } else if (compA < compB) {
+        comparison = -1;
+    }
+  if (this.state.scoreItem) {
+    return comparison;
+  } else return comparison * -1;
+};
 
 
 render() {
 
-    const sortByScore = (a, b) => {
-        const compA = a.score;
-        const compB = b.score;
-        
-        let comparison = 0;
-        if (compA > compB) {
-            comparison = 1;
-        } else if (compA < compB) {
-            comparison = -1;
-        }
-      if (this.state.scoreItem) {
-        return comparison;
-      } else return comparison * -1;
-    };
 
     // style in obj
 
@@ -125,7 +127,7 @@ render() {
         </span>
         {
    this.state.robots
-      .sort(sortByScore)
+      .sort(this.sortByScore)
       .filter(bot => {
         return (
             // sökfunktion, gör allt till Lowercase och jämför det men skriver i input-fältet med robotarnas namn.

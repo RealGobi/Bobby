@@ -17,6 +17,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
 }
+
 .container {
   display: flex;
   justify-content:space-between;
@@ -91,6 +92,38 @@ input::placeholder {
   display: flex;
   align-items: center;
 }
+.grid-item input[type=checkbox]:focus { 
+    outline: none;  
+}
+
+
+  .grid-item:nth-child(1) input[type=checkbox] {
+  position: relative;
+  left: -1px;
+  background: url('./img/star-inactive.svg');
+  background-size: 90%;
+  background-position-x: -1px;
+  background-repeat: no-repeat;
+  width:1.7rem;
+  height:1.7rem;
+  display:inline-block;
+  padding: 0 0 0 0px;
+  border-radius:0;
+  border:0;
+  }
+  .grid-item:nth-child(1) input[type=checkbox]:checked {
+    position: relative;
+    left: -1px;
+    background: url('./img/star-active.svg');
+    background-size: 90%;
+    background-position-x: -1px;
+    background-repeat: no-repeat;
+    width:1.7rem;
+    height:1.7rem;
+    display:inline-block;
+    padding: 0 0 0 0px;
+  }
+/*    */
 .grid-item p {
   padding:.4rem .75rem;
 }
