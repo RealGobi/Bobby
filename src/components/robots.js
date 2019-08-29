@@ -31,92 +31,79 @@ class Robots extends Component {
     });
     temp.sort();
     let filterBySet = [...new Set(temp)];
-    filterBySet.unshift('Favourites')
+    filterBySet.unshift("Favourites");
     this.setState({ categories: filterBySet });
-    this.setState({ activeCategory: filterBySet});
+    this.setState({ activeCategory: filterBySet });
 }
-
 
   handleChange = uniq => {
-      if(this.state.activeCategory === this.state.categories){
-        console.log('vill jag va här? ...1')
+    if (this.state.activeCategory === this.state.categories) {
+      console.log("vid val 1");
+      this.setState({activeCategory:this.state.activeCategory.filter(c => c === uniq)  
+      });
+      return;
+    }
+    if (this.state.activeCategory.includes(uniq)) {
+      console.log("vid urkryssning av kategori");
+      this.setState({
+        activeCategory: this.state.activeCategory.filter(item => item !== uniq)
+      });
+    } else {
+        console.log("vid ikryssning av kategori");
+      this.setState(prevState => ({
+        activeCategory: [...prevState.activeCategory, uniq]
+      }));
+    }
+  };
 
-          this.setState(prevState => ({
-             activeCategory: prevState.activeCategory.includes(uniq) 
-             ? prevState.activeCategory.filter(c => c === uniq)
-             : null
-            }));
-            return;
+  score = () => {
+    this.setState({
+      scoreItem: !this.state.scoreItem
+    });
+  };
+
+  name = () => {
+    this.setState({
+      nameItem: !this.state.nameItem
+    });
+  };
+
+  searchUpdate(value) {
+    this.setState({
+      searchText: value
+    });
+  }
+  sortByName  = (a, b) => {
+      const compA = a.name;
+      const compB = b.name;
+
+      let comparison = 0;
+      if (compA > compB) {
+          comparison = 1;
+      } else if (compA < compB) {
+          comparison = -1;
       }
-      if(this.state.activeCategory.includes(uniq)){
-          console.log('vill jag va här? ...2')
-          // ta bort cat om den redan finns itryckt
-         this.setState({
-            activeCategory:this.state.activeCategory.filter(item => item !== uniq)
-         })
-      } else {
-        console.log('vill jag va här? ...3')
+    if (this.state.nameItem) {
+      return comparison;
+    } 
+  };
 
-        this.setState(prevState =>({
-            activeCategory:  [...prevState.activeCategory, uniq ]
-        }))
-
-      }
-    
-};
-
-score = () => {
-    this.setState({
-        scoreItem: !this.state.scoreItem
-    });
-};
-
-name = () => {
-    this.setState({
-        nameItem: !this.state.nameItem
-    });
-};
-
-searchUpdate(value) {
-    this.setState({
-        searchText: value
-    });
-}
-// sortByName  = (a, b) => {
-//     const compA = a.name;
-//     const compB = b.name;
-    
-//     let comparison = 0;
-//     if (compA > compB) {
-//         comparison = 1;
-//     } else if (compA < compB) {
-//         comparison = -1;
-//     }
-//   if (this.state.nameItem) {
-//     return comparison;
-//   } else return comparison * -1;
-// };
-
-
-sortByScore = (a, b) => {
+  sortByScore = (a, b) => {
     const compA = a.score;
     const compB = b.score;
-    
+
     let comparison = 0;
     if (compA > compB) {
-        comparison = 1;
+      comparison = 1;
     } else if (compA < compB) {
-        comparison = -1;
+      comparison = -1;
     }
-  if (this.state.scoreItem) {
-    return comparison;
-  } else return comparison * -1;
-};
+    if (this.state.scoreItem) {
+      return comparison;
+    } else return comparison * -1;
+  };
 
-
-render() {
-
-
+  render() {
     // style in obj
 
     const spanStyle = {
@@ -147,7 +134,6 @@ render() {
       cursor: "pointer"
     };
 
-
     //Conditional Rendering
 
     const topScore = <img src={arrow} alt="arrow" style={arrowStyle} />;
@@ -163,7 +149,9 @@ render() {
           searchUpdate={this.searchUpdate.bind(this)}
         />
         <span style={spanStyleFlex}>
-          <p style={spanStyleName}  onClick={this.name}>Name</p>
+          <p style={spanStyleName} onClick={this.name}>
+            Name
+          </p>
           <p style={spanStyle}>
             Score
             <span onClick={this.score}>
@@ -171,29 +159,26 @@ render() {
             </span>
           </p>
         </span>
-        {
-            
-   this.state.robots 
-      .sort(/*this.state.nameItem ? this.sortByName :*/ this.sortByScore)
-      .filter(bot => {
-        return (
-            // sökfunktion, gör allt till Lowercase och jämför det men skriver i input-fältet med robotarnas namn.
-          bot.name.toLowerCase().indexOf(this.state.searchText.toLowerCase()) >=
-          0
-        );
-      })
-      // sorterar ut på vald kategori, först kollar "some()"med samarbete av "include()" om bot.cat finns i activcat, sen mapas de som kolarar filtreringen ut
-      .filter(bot => {
-        return bot.categories.some(value => {
-            return this.state.activeCategory.includes(value) 
-        })
-      })
-      .map((bot, idx) => {
-              return <Robot idx={idx} bot={bot} key={idx}/>
-          } 
-        )
-    } 
-    </div>
+        {this.state.robots
+          .sort(this.state.nameItem ? this.sortByName : this.sortByScore)
+          .filter(bot => {
+            return (
+              // sökfunktion, gör allt till Lowercase och jämför det men skriver i input-fältet med robotarnas namn.
+              bot.name
+                .toLowerCase()
+                .indexOf(this.state.searchText.toLowerCase()) >= 0
+            );
+          })
+          // sorterar ut på vald kategori, först kollar "some()"med samarbete av "include()" om bot.cat finns i activcat, sen mapas de som kolarar filtreringen ut
+          .filter(bot => {
+            return bot.categories.some(value => {
+              return this.state.activeCategory.includes(value);
+            });
+          })
+          .map((bot, idx) => {
+            return <Robot idx={idx} bot={bot} key={idx} />;
+          })}
+      </div>
     );
   }
 }

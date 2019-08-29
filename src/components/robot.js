@@ -4,25 +4,33 @@ import starActive from "../img/star-active.svg";
 
 
 
-export default (props) => {
+export default (props) => {   
+    const id = props.bot.id;
+  
+    function useLocalStorage(localItem) {
+        
+        const [loc, setState] = useState(localStorage.getItem(localItem));
+        
+        function setLoc(newItem){
+            localStorage.setItem(localItem, newItem)
+            setState(newItem)
+        }
+        return [loc, setLoc]
+    }
+    const [catFav, setCatFav] = useLocalStorage(id);
 
     
-    const [catFav, setCatFav] = useState(false);
- 
-
-function addFavourites() {
-    switch (catFav){
-        case !true: // om den inte är san, allså falsk, så lägg till.
-                console.log('körs du enns???')
-                props.bot.categories.push("Favourites");
-                break;
-        case !false: // om den inte är falsk, allså san, så ta bort.
-                props.bot.categories.pop();
-                break;
+    function addFavourites() {
+        switch (catFav){
+            case !true: // om den inte är san, allså falsk, så lägg till.
+            props.bot.categories.push("Favourites");
+            break;
+            case !false: // om den inte är falsk, allså san, så ta bort.
+            props.bot.categories.pop();
+            break;
             default:
-    }
-}
-
+            }
+        }
 
     console.log(catFav)
     // variables
@@ -63,7 +71,8 @@ function addFavourites() {
           </p>
           <span onClick={()=>{
               addFavourites();
-              setCatFav(!catFav)}}>
+              setCatFav(!catFav)
+              }}>
             {catFav ? favOn : favOff}
           </span>
         </div>

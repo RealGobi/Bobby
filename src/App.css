@@ -19,14 +19,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container {
-  display: flex;
-  justify-content:space-between;
+  display: grid;
+  grid-template-columns: auto auto;
   width: 700px;
-  margin-bottom: 3rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 .item {
-  margin: 1.1rem 2rem;
+  text-align: left;
+  margin: 1rem 0 1rem 2.5rem;
   color: rgb(124, 46, 89);
+}
+.item:nth-child(2){
+  margin: 1.35rem 2.5rem 1rem 0;
 }
 .logo {
   max-width: 120px;
@@ -61,7 +66,7 @@ input::placeholder {
   padding-bottom: 1rem;
   color:white;
   font-weight: 300;
-  width: 100%;
+  width: 100vw;
 }
 
 .filter{
@@ -125,7 +130,7 @@ input::placeholder {
   }
 /*    */
 .grid-item p {
-  padding:.4rem .75rem;
+  padding:.4rem .5rem;
 }
 .grid-item input[type='checkbox'] {
     -webkit-appearance:none;
