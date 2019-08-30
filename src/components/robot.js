@@ -6,32 +6,28 @@ import starActive from "../img/star-active.svg";
 
 export default (props) => {   
     const id = props.bot.id;
-  
+    
     function useLocalStorage(localItem) {
-        
         const [loc, setState] = useState(localStorage.getItem(localItem));
-        
         function setLoc(newItem){
             localStorage.setItem(localItem, newItem)
             setState(newItem)
-        }
-        return [loc, setLoc]
+            }
+            return [loc, setLoc]
     }
     const [catFav, setCatFav] = useLocalStorage(id);
 
     
     function addFavourites() {
-        switch (catFav){
-            case !true: // om den inte är san, allså falsk, så lägg till.
+        if (catFav !== true){
+              // om den inte är san, allså falsk, så lägg till.
             props.bot.categories.push("Favourites");
-            break;
-            case !false: // om den inte är falsk, allså san, så ta bort.
+        } else {
+            // om den inte är falsk, allså san, så ta bort.
             props.bot.categories.pop();
-            break;
-            default:
-            }
         }
-
+       }
+        
     console.log(catFav)
     // variables
 
@@ -50,15 +46,16 @@ export default (props) => {
               backgroundSize: "contain"
             }}
           ></div>
-          <span style={{ paddingLeft: ".5rem", textAlign: "left" }}>
-            <p style={{ textAlign: "left" }}>{props.bot.name}</p>
+          <span className="botNameStyle">
+            <p>{props.bot.name}</p>
             <span className="numberOfTheBeast">{props.idx + 1}.</span>
             <span style={{ fontSize: "10px", textAlign: "left" }}>
               {props.bot.categories.map(cat => {
                 return (
+                  
                   <p
                     key={i++}
-                    style={{ display: "inline", padding: ".2rem" }}
+                    className='categoriesStyle'
                   >
                     {cat}
                   </p>
@@ -66,12 +63,12 @@ export default (props) => {
               })}
             </span>
           </span>
-          <p style={{ textAlign: "right", paddingRight: "1rem" }}>
+          <p className='scoreStyle'>
             {props.bot.score}
           </p>
           <span onClick={()=>{
-              addFavourites();
-              setCatFav(!catFav)
+            setCatFav(!catFav)
+            addFavourites();
               }}>
             {catFav ? favOn : favOff}
           </span>

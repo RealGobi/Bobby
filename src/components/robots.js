@@ -115,29 +115,31 @@ class Robots extends Component {
       fontSize: "12px",
       padding: " 0 0 0 35px"
     };
-    const spanStyleFlex = {
-      display: "flex",
-      justifyContent: "space-between",
-      width: "400px",
-      margin: "0 auto",
-      marginTop: "2rem"
-    };
-    const arrowStyle = {
-      width: "10px",
-      padding: "0rem .3rem",
-      transform: "rotateX(180deg)",
-      cursor: "pointer"
-    };
-    const arrowDown = {
-      width: "10px",
-      padding: "0rem .3rem",
-      cursor: "pointer"
-    };
+    /////////////////////////////////////
+    // const spanStyleFlex = {
+    //   display: "flex",
+    //   justifyContent: "space-between",
+    //   width: "400px",
+    //   margin: "0 auto",
+    //   marginTop: "2rem"
+    // };
+    // const arrowStyle = {
+        //   width: "10px",
+        //   padding: "0rem .3rem",
+        //   transform: "rotateX(180deg)",
+        //   cursor: "pointer"
+        // };
+        // const arrowDown = {
+            //   width: "10px",
+            //   padding: "0rem .3rem",
+            //   cursor: "pointer"
+            // };
+/////////// SKICKAD TILL CSS FILEN!//////////////////
 
     //Conditional Rendering
 
-    const topScore = <img src={arrow} alt="arrow" style={arrowStyle} />;
-    const lowScore = <img src={arrow} alt="arrow" style={arrowDown} />;
+    const topScore = <img src={arrow} alt="arrow" className='arrowStyle' />;
+    const lowScore = <img src={arrow} alt="arrow" className='arrowDown' />;
 
     return (
       <div className="robots">
@@ -148,7 +150,7 @@ class Robots extends Component {
           searchText={this.state.searchText}
           searchUpdate={this.searchUpdate.bind(this)}
         />
-        <span style={spanStyleFlex}>
+        <span className="spanStyleFlex">
           <p style={spanStyleName} onClick={this.name}>
             Name
           </p>
